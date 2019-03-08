@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.TeamFoundation.Git.Extensibility;
+using VisualStudio.GitCommands.Windows;
 using Task = System.Threading.Tasks.Task;
 
 namespace VisualStudio.GitCommands
@@ -29,16 +31,22 @@ namespace VisualStudio.GitCommands
         /// </summary>
         private readonly AsyncPackage package;
 
+        private readonly IGitExt _gitService;
+
+        private readonly IVsOutputWindow _outputWindow;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GitCommands"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private GitCommands(AsyncPackage package, OleMenuCommandService commandService)
+        private GitCommands(AsyncPackage package, OleMenuCommandService commandService, IGitExt gitService, IVsOutputWindow outputWindow)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
+            _gitService = gitService ?? throw new ArgumentNullException(nameof(gitService));
+            _outputWindow = outputWindow ?? throw new ArgumentNullException(nameof(outputWindow));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
@@ -76,7 +84,10 @@ namespace VisualStudio.GitCommands
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
-            Instance = new GitCommands(package, commandService);
+            IGitExt gitService = await package.GetServiceAsync((typeof(IGitExt))) as IGitExt;
+            IVsOutputWindow outputWindow = await package.GetServiceAsync((typeof(IVsOutputWindow))) as IVsOutputWindow;
+
+            Instance = new GitCommands(package, commandService, gitService, outputWindow);
         }
 
         /// <summary>
@@ -89,6 +100,14 @@ namespace VisualStudio.GitCommands
         private void Execute(object sender, EventArgs e)
         {
             ThreadHelper.ThrowIfNotOnUIThread();
+
+            CommandsWindow window = new CommandsWindow();
+            if (window.ShowDialog() == true)
+            {
+                var value = window.SelectedGitCommand;
+            }
+
+
             string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
             string title = "GitCommands";
 
