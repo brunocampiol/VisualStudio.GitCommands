@@ -3,7 +3,10 @@
     <Metadata>
         <Identity Id="VisualStudio.GitCommands.bfb11d7d-0754-4ef9-b045-fae3497f5d8c" Version="1.0" Language="en-US" Publisher="Bruno Paes" />
         <DisplayName>VisualStudio.GitCommands</DisplayName>
-        <Description xml:space="preserve">Git command executer for TFS. Execute git commands stored available in menu "Git Commands". Writes command result to Visual Studio output window.Git </Description>
+        <Description xml:space="preserve">Git command executer for TFS</Description>
+        <MoreInfo>https://github.com/brunocampiol/VisualStudio.GitCommands</MoreInfo>
+        <Icon>GitCommandsIcon.ico</Icon>
+        <PreviewImage>GitCommandsIcon.png</PreviewImage>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />

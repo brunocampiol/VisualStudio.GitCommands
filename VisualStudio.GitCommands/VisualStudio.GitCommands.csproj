@@ -92,6 +92,14 @@
     </VSCTCompile>
     <Content Include="index.html" />
     <Content Include="Resources\GitCommands.png" />
+    <Content Include="Resources\GitCommandsIcon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Resources\GitCommandsIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\GitCommandsPackage.ico" />
     <Content Include="stylesheet.css" />
   </ItemGroup>
