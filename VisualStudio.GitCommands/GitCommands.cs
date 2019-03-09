@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TeamFoundation.Git.Extensibility;
+using VisualStudio.GitCommands.GitHelpers;
+using VisualStudio.GitCommands.Models;
 using VisualStudio.GitCommands.Windows;
 using Task = System.Threading.Tasks.Task;
 
@@ -33,7 +35,7 @@ namespace VisualStudio.GitCommands
 
         private readonly IGitExt _gitService;
 
-        private readonly IVsOutputWindow _outputWindow;
+        private readonly IVsOutputWindowPane _vsOutputWindowPane;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GitCommands"/> class.
@@ -41,12 +43,12 @@ namespace VisualStudio.GitCommands
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private GitCommands(AsyncPackage package, OleMenuCommandService commandService, IGitExt gitService, IVsOutputWindow outputWindow)
+        private GitCommands(AsyncPackage package, OleMenuCommandService commandService, IGitExt gitService, IVsOutputWindowPane vsOutputWindow)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
             _gitService = gitService ?? throw new ArgumentNullException(nameof(gitService));
-            _outputWindow = outputWindow ?? throw new ArgumentNullException(nameof(outputWindow));
+            _vsOutputWindowPane = vsOutputWindow ?? throw new ArgumentNullException(nameof(vsOutputWindow));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
@@ -87,7 +89,14 @@ namespace VisualStudio.GitCommands
             IGitExt gitService = await package.GetServiceAsync((typeof(IGitExt))) as IGitExt;
             IVsOutputWindow outputWindow = await package.GetServiceAsync((typeof(IVsOutputWindow))) as IVsOutputWindow;
 
-            Instance = new GitCommands(package, commandService, gitService, outputWindow);
+            // Instantiates VS output window
+            var paneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.GeneralPane_guid;
+            var paneName = "Git Commands Output";
+            IVsOutputWindowPane vsoutputwindow;
+            outputWindow.CreatePane(paneGuid, paneName, 1, 0);
+            outputWindow.GetPane(paneGuid, out vsoutputwindow);
+
+            Instance = new GitCommands(package, commandService, gitService, vsoutputwindow);
         }
 
         /// <summary>
@@ -102,23 +111,39 @@ namespace VisualStudio.GitCommands
             ThreadHelper.ThrowIfNotOnUIThread();
 
             CommandsWindow window = new CommandsWindow();
-            if (window.ShowDialog() == true)
+            window.ShowDialog();
+
+            if (window.SelectedGitCommand != null)
             {
-                var value = window.SelectedGitCommand;
+                var gitCommand = window.SelectedGitCommand;
+                GitCommandExecuter gitExecuter = new GitCommandExecuter(_gitService);
+                GitCommandResult result = gitExecuter.Execute(gitCommand);
+
+
+                WriteLineToOutputWindow("########################################");
+                if (result.IsError)
+                {
+                    WriteLineToOutputWindow($"Git Error - at {DateTime.Now}");
+                    WriteLineToOutputWindow(result.ErrorMessage);
+                }
+                else
+                {
+                    WriteLineToOutputWindow($"Git Command OK - at {DateTime.Now}");
+                }
+                WriteLineToOutputWindow("########################################");
+                WriteLineToOutputWindow(String.Empty);
+
+                WriteLineToOutputWindow(result.OutputMessage);
+                WriteLineToOutputWindow(String.Empty);
+                WriteLineToOutputWindow(String.Empty);
             }
+        }
 
+        private void WriteLineToOutputWindow(string text)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
 
-            string message = string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.GetType().FullName);
-            string title = "GitCommands";
-
-            // Show a message box to prove we were here
-            VsShellUtilities.ShowMessageBox(
-                this.package,
-                message,
-                title,
-                OLEMSGICON.OLEMSGICON_INFO,
-                OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+            _vsOutputWindowPane.OutputString(text + Environment.NewLine);
         }
     }
 }

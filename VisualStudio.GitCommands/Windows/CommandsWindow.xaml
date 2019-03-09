@@ -10,8 +10,8 @@
                         Width="500" 
                         Height="600">
     <Grid>
-        <TextBox HorizontalAlignment="Left" Name="TxtCommand" Height="19" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" RenderTransformOrigin="0.405,0.92"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="327,9,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.966,-0.172" Height="19" Click="ButtonSave_Click"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtCommand" Height="19" Margin="39,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283" RenderTransformOrigin="0.405,0.92"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="327,9,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.966,-0.172" Height="19" Click="ButtonAdd_Click"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="407,9,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.966,-0.172" Height="19" Click="ButtonDelete_Click"/>
         <ListView HorizontalAlignment="Left" Name="CommandListView" Height="486" Margin="10,50,0,0" VerticalAlignment="Top" Width="472" SelectionMode="Single" Loaded="OnLoadedEvent">
             <ListView.View>
@@ -21,5 +21,6 @@
             </ListView.View>
         </ListView>
         <Button Content="Run" HorizontalAlignment="Left" Margin="407,541,0,0" VerticalAlignment="Top" Width="75" Click="ButtonRun_Click"/>
+        <Label Content="git" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
     </Grid>
 </local:BaseDialogWindow>
