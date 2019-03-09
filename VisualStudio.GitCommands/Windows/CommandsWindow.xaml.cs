@@ -22,6 +22,8 @@ namespace VisualStudio.GitCommands.Windows
 
             PopulateViewListItemFromSettings();
 
+            //CommandListView.MouseDoubleClick
+
             SelectedGitCommand = null;
         }
 
@@ -44,6 +46,11 @@ namespace VisualStudio.GitCommands.Windows
 
             if (String.IsNullOrEmpty(gitCommand)) return;
             if (gitCommand.ContainsIgnoreCase("git")) gitCommand = Regex.Replace(gitCommand, "git", "", RegexOptions.IgnoreCase).Trim();
+            if (CommandListView.Items.Contains(gitCommand))
+            {
+                TxtCommand.Text = String.Empty;
+                return;
+            }
 
             CommandListView.Items.Add(gitCommand);
             TxtCommand.Text = String.Empty;
