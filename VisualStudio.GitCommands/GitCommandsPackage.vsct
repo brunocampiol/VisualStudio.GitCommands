@@ -70,6 +70,13 @@
           <ButtonText>View</ButtonText>
         </Strings>
       </Button>
+      <Button guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" type="Button">
+        <Parent guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <ButtonText>Pull origin development</ButtonText>
+        </Strings>
+      </Button>
+
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -83,6 +90,11 @@
     </Bitmaps>
   </Commands>
 
+  <KeyBindings>
+    <!-- Binds git pull origin development to CTRL+K CTRL+J -->
+    <KeyBinding guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" editor="guidVSStd97" mod1="Control" key1="0x4B" mod2="Control"  key2="0x4A"/>
+  </KeyBindings>
+
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidGitCommandsPackage" value="{044e5a32-fdeb-4fc9-8019-0bcae45ca92a}" />
@@ -92,6 +104,7 @@
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="TopLevelMenu" value="0x1021" />
       <IDSymbol name="GitCommandsId" value="0x0100" />
+      <IDSymbol name="GitPullDevelopmentId" value="0x0102" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{27225594-0b43-404f-9642-7d50652c7eaa}" >

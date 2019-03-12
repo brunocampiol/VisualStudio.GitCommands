@@ -9,8 +9,12 @@ namespace VisualStudio.GitCommands.Static
     /// <summary>
     /// Represents container for constants.
     /// </summary>
-    public static class Constants
+    public static class ExtensionConstants
     {
+
+        public const string PanelName = "Git Commands Output";
+
+        public const string PullOriginDevelopment = "pull origin development";
 
         public const string UnknownRepositoryErrorMessage = "Select repository to execute commands.";
 

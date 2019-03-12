@@ -26,7 +26,7 @@ namespace VisualStudio.GitCommands.GitHelpers
             {
                 var activeRepository = _gitService.ActiveRepositories.FirstOrDefault();
                 if (activeRepository == null)
-                    return new GitCommandResult { ErrorMessage = Constants.UnknownRepositoryErrorMessage };
+                    return new GitCommandResult { ErrorMessage = ExtensionConstants.UnknownRepositoryErrorMessage };
 
                 var gitExePath = GitPathHelper.GetGitPath();
 
@@ -59,11 +59,11 @@ namespace VisualStudio.GitCommands.GitHelpers
             {
                 if (e.TargetSite.Name != "StartWithCreateProcess") throw;
 
-                return new GitCommandResult { ErrorMessage = Constants.UnableFindGitMessage };
+                return new GitCommandResult { ErrorMessage = ExtensionConstants.UnableFindGitMessage };
             }
             catch (Exception e)
             {
-                return new GitCommandResult { ErrorMessage = Constants.UnexpectedErrorMessage + Environment.NewLine + e.AllExceptionMessages() };
+                return new GitCommandResult { ErrorMessage = ExtensionConstants.UnexpectedErrorMessage + Environment.NewLine + e.AllExceptionMessages() };
             }
         }
     }

@@ -70,6 +70,7 @@ namespace VisualStudio.GitCommands
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await GitCommands.InitializeAsync(this);
+            await GitOriginDevelopment.InitializeAsync(this);
         }
 
         #endregion
