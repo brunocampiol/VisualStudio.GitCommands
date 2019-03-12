@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TeamFoundation.Git.Extensibility;
@@ -35,18 +36,25 @@ namespace VisualStudio.GitCommands
 
         private readonly IVsOutputWindowPane _vsOutputWindowPane;
 
+        private readonly DTE _dteVsCoreAutomation;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="GitCommands"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private GitOriginDevelopment(AsyncPackage package, OleMenuCommandService commandService, IGitExt gitService, IVsOutputWindowPane vsOutputWindow)
+        private GitOriginDevelopment(AsyncPackage package, 
+                                        OleMenuCommandService commandService, 
+                                        IGitExt gitService, 
+                                        IVsOutputWindowPane vsOutputWindow,
+                                        DTE dteVsCoreAutomation)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
             _gitService = gitService ?? throw new ArgumentNullException(nameof(gitService));
             _vsOutputWindowPane = vsOutputWindow ?? throw new ArgumentNullException(nameof(vsOutputWindow));
+            _dteVsCoreAutomation = dteVsCoreAutomation ?? throw new ArgumentNullException(nameof(dteVsCoreAutomation));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
@@ -85,9 +93,9 @@ namespace VisualStudio.GitCommands
 
             OleMenuCommandService commandService = await package.GetServiceAsync((typeof(IMenuCommandService))) as OleMenuCommandService;
             IGitExt gitService = await package.GetServiceAsync((typeof(IGitExt))) as IGitExt;
+            DTE vsCoreAutomation = await package.GetServiceAsync((typeof(DTE))) as DTE;
             IVsOutputWindow outputWindow = await package.GetServiceAsync((typeof(IVsOutputWindow))) as IVsOutputWindow;
-
-
+            
             // Instantiates VS output window
             var paneGuid = Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.GeneralPane_guid;
             var paneName = ExtensionConstants.PanelName;
@@ -95,7 +103,7 @@ namespace VisualStudio.GitCommands
             outputWindow.CreatePane(paneGuid, paneName, 1, 0);
             outputWindow.GetPane(paneGuid, out vsoutputwindow);
 
-            Instance = new GitOriginDevelopment(package, commandService, gitService, vsoutputwindow);
+            Instance = new GitOriginDevelopment(package, commandService, gitService, vsoutputwindow, vsCoreAutomation);
         }
 
         /// <summary>
@@ -143,7 +151,7 @@ namespace VisualStudio.GitCommands
         {
             ThreadHelper.ThrowIfNotOnUIThread();
 
-            _vsOutputWindowPane.Activate();
+            _dteVsCoreAutomation.ExecuteCommand("View.Output");
         }
     }
 }
