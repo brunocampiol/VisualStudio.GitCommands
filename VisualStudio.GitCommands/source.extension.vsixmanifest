@@ -5,7 +5,6 @@
         <DisplayName>VisualStudio.GitCommands</DisplayName>
         <Description xml:space="preserve">Git command executer for TFS</Description>
         <MoreInfo>https://github.com/brunocampiol/VisualStudio.GitCommands</MoreInfo>
-        <PreviewImage>GitCommandsIcon.png</PreviewImage>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />
