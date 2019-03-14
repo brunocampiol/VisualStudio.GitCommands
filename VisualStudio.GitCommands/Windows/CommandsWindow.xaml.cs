@@ -22,9 +22,17 @@ namespace VisualStudio.GitCommands.Windows
 
             PopulateViewListItemFromSettings();
 
-            //CommandListView.MouseDoubleClick
+            CommandListView.MouseDoubleClick += CommandListView_MouseDoubleClick;
 
             SelectedGitCommand = null;
+        }
+
+        private void CommandListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            string selectedCommand = ((System.Windows.Controls.Primitives.Selector)sender).SelectedValue.ToString();
+            SelectedGitCommand = selectedCommand;
+            
+            this.Close();
         }
 
         private void OnLoadedEvent(object sender, RoutedEventArgs e)
