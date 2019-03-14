@@ -44,7 +44,7 @@ namespace VisualStudio.GitCommands.Windows
                 var workingWidth = listview.ActualWidth - SystemParameters.VerticalScrollBarWidth; // take into account vertical scrollbar
 
                 ((GridView)listview.View).Columns[0].Width = workingWidth;
-                ((GridView)listview.View).Columns[0].Header = "Stored Git Commands";
+                ((GridView)listview.View).Columns[0].Header = ExtensionConstants.StoredGitCommands;
             }
         }
 

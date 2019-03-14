@@ -11,6 +11,7 @@ namespace VisualStudio.GitCommands.Static
     /// </summary>
     public static class ExtensionConstants
     {
+        public const string StoredGitCommands = "Stored Git Commands";
 
         public const string PanelName = "Git Commands Output";
 
