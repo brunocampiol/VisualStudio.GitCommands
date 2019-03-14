@@ -29,10 +29,13 @@ namespace VisualStudio.GitCommands.Windows
 
         private void CommandListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            string selectedCommand = ((System.Windows.Controls.Primitives.Selector)sender).SelectedValue.ToString();
-            SelectedGitCommand = selectedCommand;
-            
-            this.Close();
+            if (((System.Windows.Controls.Primitives.Selector)sender).SelectedValue != null)
+            {
+                string selectedCommand = ((System.Windows.Controls.Primitives.Selector)sender).SelectedValue.ToString();
+                SelectedGitCommand = selectedCommand;
+
+                this.Close();
+            }
         }
 
         private void OnLoadedEvent(object sender, RoutedEventArgs e)
