@@ -121,6 +121,7 @@ namespace VisualStudio.GitCommands
             ThreadHelper.ThrowIfNotOnUIThread();
 
             CommandsWindow window = new CommandsWindow();
+            window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
             window.ShowDialog();
 
             if (window.SelectedGitCommand != null)

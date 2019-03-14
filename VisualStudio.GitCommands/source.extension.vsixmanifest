@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VisualStudio.GitCommands.bfb11d7d-0754-4ef9-b045-fae3497f5d8c" Version="1.0" Language="en-US" Publisher="Bruno Paes" />
+        <Identity Id="VisualStudio.GitCommands.bfb11d7d-0754-4ef9-b045-fae3497f5d8c" Version="1.1" Language="en-US" Publisher="Bruno Paes" />
         <DisplayName>VisualStudio.GitCommands</DisplayName>
         <Description xml:space="preserve">Git command executer for TFS</Description>
         <MoreInfo>https://github.com/brunocampiol/VisualStudio.GitCommands</MoreInfo>
+        <Icon>Resources\GitCommandsIcon90.png</Icon>
+        <PreviewImage>Resources\GitCommandsIcon175.png</PreviewImage>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 16.0)" />

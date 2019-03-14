@@ -92,9 +92,10 @@
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
     <Content Include="index.html" />
-    <Content Include="Resources\GitCommands.png" />
-    <Content Include="Resources\GitCommandsIcon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Resources\GitCommandsIcon175.png">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Resources\GitCommandsIcon90.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\GitCommandsPackage.ico" />
