@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VisualStudio.GitCommands.Static
+﻿namespace VisualStudio.GitCommands.Static
 {
     /// <summary>
     /// Represents container for constants.
@@ -16,6 +10,8 @@ namespace VisualStudio.GitCommands.Static
         public const string PanelName = "Git Commands Output";
 
         public const string PullOriginDevelopment = "pull origin development";
+
+        public const string PullOriginMaster = "pull origin master";
 
         public const string UnknownRepositoryErrorMessage = "Select repository to execute commands.";
 

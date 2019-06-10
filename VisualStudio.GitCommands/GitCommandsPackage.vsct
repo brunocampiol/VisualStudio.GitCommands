@@ -76,7 +76,13 @@
           <ButtonText>Pull origin development</ButtonText>
         </Strings>
       </Button>
-
+      <Button guid="guidGitCommandsPackageCmdSet" id="GitPullMasterId" type="Button">
+        <Parent guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <LocCanonicalName>DanBar.TrackInSolutionExplorer</LocCanonicalName>
+          <ButtonText>Pull origin master</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.--><!--
@@ -92,28 +98,19 @@
 
   <KeyBindings>
     <!-- Binds git pull origin development to CTRL+K CTRL+J -->
-    <KeyBinding guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" editor="guidVSStd97" mod1="Control" key1="0x4B" mod2="Control"  key2="0x4A"/>
+    <KeyBinding guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" editor="guidVSStd97" mod1="Control" key1="0x4B" mod2="Control" key2="0x49"/>
   </KeyBindings>
 
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidGitCommandsPackage" value="{044e5a32-fdeb-4fc9-8019-0bcae45ca92a}" />
-
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidGitCommandsPackageCmdSet" value="{67d49f0f-8005-4955-930c-a84f3760061d}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="TopLevelMenu" value="0x1021" />
       <IDSymbol name="GitCommandsId" value="0x0100" />
       <IDSymbol name="GitPullDevelopmentId" value="0x0102" />
+      <IDSymbol name="GitPullMasterId" value="0x0103" />
     </GuidSymbol>
-
-    <!--<GuidSymbol name="guidImages" value="{27225594-0b43-404f-9642-7d50652c7eaa}" >
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>-->
   </Symbols>
 </CommandTable>
