@@ -36,13 +36,13 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidGitCommandsPullDevelopment" id="TopLevelMenu"/>
+      <Group guid="guidGitCommandsPackage" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidGitCommandsPackage" id="TopLevelMenu"/>
       </Group>
     </Groups>
 
     <Menus>
-      <Menu guid="guidGitCommandsPullDevelopment" id="TopLevelMenu" type="Menu">
+      <Menu guid="guidGitCommandsPackage" id="TopLevelMenu" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
         <Strings>
           <ButtonText>Git Commands</ButtonText>
@@ -61,22 +61,22 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidGitCommandsPullDevelopment" id="GitCommandsId" priority="0x0100" type="Button">
-        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
+      <Button guid="guidGitCommandsView" id="GitCommandsId" priority="0x0100" type="Button">
+        <Parent guid="guidGitCommandsPackage" id="MyMenuGroup" />
         <Strings>
           <CommandName>GitCommandsId</CommandName>
           <ButtonText>View</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidGitCommandsPullDevelopment" id="GitPullDevelopmentId"  priority="0x0300" type="Button">
-        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
+        <Parent guid="guidGitCommandsPackage" id="MyMenuGroup" />
         <Strings>
           <CommandName>GitPullDevelopmentId</CommandName>
           <ButtonText>Pull origin development</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidGitCommandsPullMaster" id="GitPullMasterId"  priority="0x0210" type="Button">
-        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
+        <Parent guid="guidGitCommandsPackage" id="MyMenuGroup" />
         <Strings>
           <CommandName>GitPullMasterId</CommandName>
           <ButtonText>Pull origin master</ButtonText>
@@ -92,16 +92,19 @@
   </KeyBindings>
 
   <Symbols>
+    <!-- This is the guid used to group the menu commands together -->
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidGitCommandsPackage" value="{044e5a32-fdeb-4fc9-8019-0bcae45ca92a}" />
+    <GuidSymbol name="guidGitCommandsPackage" value="{044e5a32-fdeb-4fc9-8019-0bcae45ca92a}" >
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="TopLevelMenu" value="0x1021" />
+    </GuidSymbol>
+    <GuidSymbol name="guidGitCommandsView" value="{6bc55d4b-b33e-4685-8dab-a4e54d853d08}" >
+      <IDSymbol name="GitCommandsId" value="0x0104" />
+    </GuidSymbol>
     <GuidSymbol name="guidGitCommandsPullMaster" value="{b7ae99f4-b2b2-4ebd-a482-e5fb6c4cdb27}" >
       <IDSymbol name="GitPullMasterId" value="0x0103" />
     </GuidSymbol>
-    <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidGitCommandsPullDevelopment" value="{67d49f0f-8005-4955-930c-a84f3760061d}">
-      <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="TopLevelMenu" value="0x1021" />
-      <IDSymbol name="GitCommandsId" value="0x0100" />
       <IDSymbol name="GitPullDevelopmentId" value="0x0102" />
     </GuidSymbol>
   </Symbols>

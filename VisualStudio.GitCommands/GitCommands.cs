@@ -1,12 +1,9 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Globalization;
-using System.Threading;
-using System.Threading.Tasks;
-using EnvDTE;
+﻿using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TeamFoundation.Git.Extensibility;
+using System;
+using System.ComponentModel.Design;
 using VisualStudio.GitCommands.GitHelpers;
 using VisualStudio.GitCommands.Models;
 using VisualStudio.GitCommands.Static;
@@ -23,12 +20,12 @@ namespace VisualStudio.GitCommands
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 0x0100;
+        public const int CommandId = 0x0104;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("67d49f0f-8005-4955-930c-a84f3760061d");
+        public static readonly Guid CommandSet = new Guid("6bc55d4b-b33e-4685-8dab-a4e54d853d08");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -47,9 +44,9 @@ namespace VisualStudio.GitCommands
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private GitCommands(AsyncPackage package, 
-                            OleMenuCommandService commandService, 
-                            IGitExt gitService, 
+        private GitCommands(AsyncPackage package,
+                            OleMenuCommandService commandService,
+                            IGitExt gitService,
                             IVsOutputWindowPane vsOutputWindow,
                             DTE dteVsCoreAutomation)
         {
