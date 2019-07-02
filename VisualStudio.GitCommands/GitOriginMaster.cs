@@ -21,8 +21,7 @@ namespace VisualStudio.GitCommands
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("67d49f0f-8005-4955-930c-a84f3760061d");
-        //public static readonly Guid CommandSet = new Guid("b7ae99f4-b2b2-4ebd-a482-e5fb6c4cdb27");
+        public static readonly Guid CommandSet = new Guid("b7ae99f4-b2b2-4ebd-a482-e5fb6c4cdb27");
 
         /// <summary>
         /// VS Package that provides this command, not null.

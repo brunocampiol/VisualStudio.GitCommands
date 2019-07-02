@@ -36,13 +36,13 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidGitCommandsPackageCmdSet" id="TopLevelMenu"/>
+      <Group guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidGitCommandsPullDevelopment" id="TopLevelMenu"/>
       </Group>
     </Groups>
 
     <Menus>
-      <Menu guid="guidGitCommandsPackageCmdSet" id="TopLevelMenu" type="Menu">
+      <Menu guid="guidGitCommandsPullDevelopment" id="TopLevelMenu" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
         <Strings>
           <ButtonText>Git Commands</ButtonText>
@@ -61,56 +61,48 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidGitCommandsPackageCmdSet" id="GitCommandsId" priority="0x0100" type="Button">
-        <Parent guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" />
-        <!--
-            <Icon guid="guidImages" id="bmpPic1" />
-        -->
+      <Button guid="guidGitCommandsPullDevelopment" id="GitCommandsId" priority="0x0100" type="Button">
+        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
         <Strings>
+          <CommandName>GitCommandsId</CommandName>
           <ButtonText>View</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" type="Button">
-        <Parent guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidGitCommandsPullDevelopment" id="GitPullDevelopmentId"  priority="0x0300" type="Button">
+        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
         <Strings>
+          <CommandName>GitPullDevelopmentId</CommandName>
           <ButtonText>Pull origin development</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidGitCommandsPackageCmdSet" id="GitPullMasterId" type="Button">
-        <Parent guid="guidGitCommandsPackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidGitCommandsPullMaster" id="GitPullMasterId"  priority="0x0210" type="Button">
+        <Parent guid="guidGitCommandsPullDevelopment" id="MyMenuGroup" />
         <Strings>
-          <LocCanonicalName>DanBar.TrackInSolutionExplorer</LocCanonicalName>
+          <CommandName>GitPullMasterId</CommandName>
           <ButtonText>Pull origin master</ButtonText>
         </Strings>
       </Button>
     </Buttons>
-
-    <!--The bitmaps section is used to define the bitmaps that are used for the commands.--><!--
-    <Bitmaps>
-      --><!--  The bitmap id is defined in a way that is a little bit different from the others:
-            the declaration starts with a guid for the bitmap strip, then there is the resource id of the
-            bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
-            inside a button definition. An important aspect of this declaration is that the element id
-            must be the actual index (1-based) of the bitmap inside the bitmap strip. --><!--
-      <Bitmap guid="guidImages" href="Resources\GitCommands.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
-    </Bitmaps>-->
   </Commands>
 
   <KeyBindings>
-    <!-- Binds git pull origin development to CTRL+K CTRL+J -->
-    <KeyBinding guid="guidGitCommandsPackageCmdSet" id="GitPullDevelopmentId" editor="guidVSStd97" mod1="Control" key1="0x4B" mod2="Control" key2="0x49"/>
+    <!-- Keybindings for git pull -->
+    <KeyBinding guid="guidGitCommandsPullDevelopment" id="GitPullDevelopmentId" editor="guidVSStd97" key1="K" mod1="Control" key2="D" mod2="Control"/>
+    <KeyBinding guid="guidGitCommandsPullMaster" id="GitPullMasterId" editor="guidVSStd97" key1="K" mod1="Control" key2="A" mod2="Control"/>
   </KeyBindings>
 
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidGitCommandsPackage" value="{044e5a32-fdeb-4fc9-8019-0bcae45ca92a}" />
+    <GuidSymbol name="guidGitCommandsPullMaster" value="{b7ae99f4-b2b2-4ebd-a482-e5fb6c4cdb27}" >
+      <IDSymbol name="GitPullMasterId" value="0x0103" />
+    </GuidSymbol>
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidGitCommandsPackageCmdSet" value="{67d49f0f-8005-4955-930c-a84f3760061d}">
+    <GuidSymbol name="guidGitCommandsPullDevelopment" value="{67d49f0f-8005-4955-930c-a84f3760061d}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="TopLevelMenu" value="0x1021" />
       <IDSymbol name="GitCommandsId" value="0x0100" />
       <IDSymbol name="GitPullDevelopmentId" value="0x0102" />
-      <IDSymbol name="GitPullMasterId" value="0x0103" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
